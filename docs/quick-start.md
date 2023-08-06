@@ -59,4 +59,4 @@ zookage@client-node-0:~$ beeline
 
 You can access various web UIs such as [YARN ResourceManager](http://localhost:8088/cluster){:target="_blank"} through your browser.
 
-The list of all available endpoints is in [Tips](/docs/tips#web-ui).
+The list of available endpoints is [here](/docs/tools#web-ui).
