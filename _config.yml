@@ -12,8 +12,8 @@ plugins:
 
 header_pages:
 - docs/quick-start.md
+- docs/tools.md
 - docs/configuration.md
-- docs/tips.md
 - docs/build-image.md
 
 google_analytics: G-LL5EPQBZZT

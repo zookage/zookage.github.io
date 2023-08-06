@@ -27,8 +27,8 @@ ZooKage helps you run big data animals in a sandbox environment.
 # Documents
 
 - [Quick Start](/docs/quick-start)
+- [How to use tools in ZooKage](/docs/tools)
 - [How to configure ZooKage](/docs/configuration)
-- [Tips](/docs/tips)
 - [How to build your own image](/docs/build-image)
 
 # Links

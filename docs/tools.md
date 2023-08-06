@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Tips
-permalink: /docs/tips
+title: Tools
+permalink: /docs/tools
 ---
 
 ## How to use helper commands
