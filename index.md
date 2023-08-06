@@ -34,6 +34,7 @@ ZooKage helps you run big data animals in a sandbox environment.
 # Tips
 
 - [How to prepare test data such as TPC-DS datasets](/docs/tips/test-data)
+- [How to access S3 compatible storage](/docs/tips/s3)
 
 # Links
 
