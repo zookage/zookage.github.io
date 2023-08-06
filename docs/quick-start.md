@@ -31,7 +31,7 @@ All resources are ready!
 
 ### Log in to a client container
 
-With `./bin/ssh`, you can ssh into `client-node`. Various command-line tools such as `hdfs`, `yarn`, `beeline`, etc. are available.
+With `./bin/ssh`, you can ssh into `client-node`. [Various command-line tools](/docs/tools#what-commands-are-available-on-client-node) such as `hdfs`, `yarn`, `beeline`, etc. are available.
 
 ```console
 $ ./bin/ssh

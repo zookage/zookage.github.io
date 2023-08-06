@@ -19,6 +19,20 @@ permalink: /docs/tools
 * `./bin/kubectl`
     * Alias of `kubectl --namespace zookage`
 
+## What commands are available on client-node
+
+* `aws`
+* `beeline`
+* `gohdfs`
+    * [colinmarc/hdfs](https://github.com/colinmarc/hdfs)
+* `hbase`
+* `hdfs`
+* `ozone`
+* `spark-shell`
+* `spark-sql`
+* `trino`
+* `yarn`
+
 ## Web UI
 
 You can access various web UIs through a browser of your host machine. This feature is not stable and you may sometimes have to reboot Docker Desktop when the following ports are inaccessible.
