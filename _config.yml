@@ -3,10 +3,15 @@ description: >-
   Hadoop on Kubernetes on Docker Desktop
 domain: zookage.github.io
 url: "https://zookage.github.io/"
-twitter_username: okumin
 github_username: zookage
 
 markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
+
+header_pages:
+- docs/quick-start.md
+- docs/configuration.md
+- docs/tips.md
+- docs/build-image.md
