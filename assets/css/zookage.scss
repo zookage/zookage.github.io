@@ -2,12 +2,6 @@
 ---
 @import "minima";
 
-.header-github-mark {
-  width: 24px;
-  margin: 0 0 5px 0;
-  padding: 5px -5px 5px 10px;
-}
-
 a.footer-link {
   color: #222222;
   text-decoration: underline;
@@ -28,4 +22,21 @@ a.footer-link:hover {
   color: #555555;
   font-size: 1.2em;
   font-weight: 600;
+}
+
+.header-github-mark {
+  width: 20px;
+  margin: 0 4px 3px 0;
+}
+
+@media screen and (min-width: 600px) {
+  .header-github-mark {
+    width: 24px;
+    margin: 0 0 5px 0;
+    padding: 5px -5px 5px 10px;
+  }
+
+  .header-github-label {
+    display: none;
+  }
 }
