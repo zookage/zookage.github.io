@@ -18,7 +18,7 @@ permalink: /docs/quick-start
 ### Set up a Hadoop cluster
 
 ```console
-$ git clone --branch v0.2.4 git@github.com:zookage/zookage.git
+$ git clone --branch v0.2.5 git@github.com:zookage/zookage.git
 $ cd zookage
 $ ./bin/up
 namespace/zookage created
