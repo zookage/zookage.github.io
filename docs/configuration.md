@@ -58,7 +58,7 @@ The following list contains some of valid combinations. Image tags have `-zookag
 |-|-|-|-|-|-|-|-|
 | 2.10.1 | 2.4.1 | 2.3.8 | 1.3.0 | 3.0.2, 3.1.1 | 0.9.2 | N/A | 3.6.2 |
 | 3.2.2 | 2.4.1 | 3.1.2-guava-27.0-jre | 1.3.0 | 3.4.1 | 0.9.2-guava-27.0-jre-jersey-1.19-servlet-api-3.1.0-without-jetty | 413 | 3.6.2 |
-| 3.3.6 | 2.5.3-hadoop-3.3.1 | 4.0.0 | 1.3.0 | 3.5.1 | 0.10.3 | 413 | 3.6.2 |
+| 3.3.6 | 2.5.3-hadoop-3.3.1 | 4.0.1 | 1.3.0 | 3.5.1 | 0.10.4 | 413 | 3.6.2 |
 
 ## Change configurations
 
