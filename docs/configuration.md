@@ -35,8 +35,8 @@ The Docker images used in ZooKage is interchangeable. You can replace tag names 
 ```diff
  - name: zookage-spark
    newName: zookage/zookage-spark
--  newTag: "3.5.1-zookage-0.2"
-+  newTag: "3.4.1-zookage-0.2"
+-  newTag: "3.5.1-zookage-0.3"
++  newTag: "3.4.1-zookage-0.3"
 ```
 
 ### Supported versions
@@ -52,13 +52,11 @@ ZooKage provides various pre-build images.
 - [Trino](https://hub.docker.com/r/zookage/zookage-trino/tags){:target="_blank"}
 - [ZooKeeper](https://hub.docker.com/r/zookage/zookage-zookeeper/tags){:target="_blank"}
 
-The following list contains some of valid combinations. Image tags have `-zookage-0.2` as a postfix like `3.3.1-zookage-0.2`.
+The following list contains some of valid combinations. Image tags have `-zookage-0.3` as a postfix like `3.4.1-zookage-0.3`.
 
 | Hadoop | HBase| Hive | Ozone | Spark | Tez | Trino | ZooKeeper |
 |-|-|-|-|-|-|-|-|
-| 2.10.1 | 2.4.1 | 2.3.8 | 1.3.0 | 3.0.2, 3.1.1 | 0.9.2 | N/A | 3.6.2 |
-| 3.2.2 | 2.4.1 | 3.1.2-guava-27.0-jre | 1.3.0 | 3.4.1 | 0.9.2-guava-27.0-jre-jersey-1.19-servlet-api-3.1.0-without-jetty | 413 | 3.6.2 |
-| 3.3.6 | 2.5.3-hadoop-3.3.1 | 4.0.1 | 1.3.0 | 3.5.1 | 0.10.4 | 413 | 3.6.2 |
+| 3.4.1 | 2.6.3 | 4.1.0 | 2.0.0 | 4.0.1 | 0.10.5 | 476 | 3.9.4 |
 
 ## Change configurations
 
