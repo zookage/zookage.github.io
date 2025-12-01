@@ -45,6 +45,6 @@ You can seamlessly use the new Docker image in ZooKage by updating [kustomizatio
 ```diff
  - name: zookage-hadoop
    newName: zookage/zookage-hadoop
--  newTag: "3.4.1-zookage-0.3"
+-  newTag: "3.4.1-zookage-0.4"
 +  newTag: "zookage-3.4.2"
 ```

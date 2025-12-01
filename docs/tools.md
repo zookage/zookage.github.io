@@ -37,7 +37,9 @@ permalink: /docs/tools
 
 You can access various web UIs through a browser of your host machine. This feature is not stable and you may sometimes have to reboot Docker Desktop when the following ports are inaccessible.
 
-* [Trino Web UI](http://localhost:8080/ui/){:target="_blank"}
+* [Kaycloak Web UI (username=admin, password=admin)](http://localhost:8080/admin/master/console/)
+* [Ranger Web UI (username=admin, password=admin)](http://localhost:6080/login.jsp)
+* [Trino Web UI](http://localhost:8090/ui/){:target="_blank"}
 * [YARN ResourceManager](http://localhost:8088/cluster){:target="_blank"}
 * [YARN-UI V2](http://localhost:8088/ui2/){:target="_blank"}
 * [YARN Timeline Server](http://localhost:8188/applicationhistory){:target="_blank"}
