@@ -20,6 +20,7 @@ ZooKage helps you run big data animals in a sandbox environment
 - [Apache HBase](https://hbase.apache.org/){:target="_blank"}
 - [Apache Hive](https://hive.apache.org/){:target="_blank"}
 - [Apache Ozone](https://ozone.apache.org/){:target="_blank"}
+- [Apache Ranger](https://ranger.apache.org/){:target="_blank"}
 - [Apache Spark](https://spark.apache.org/){:target="_blank"}
 - [Apache Tez](https://tez.apache.org/){:target="_blank"}
 - [Apache ZooKeeper](https://zookeeper.apache.org/){:target="_blank"}
