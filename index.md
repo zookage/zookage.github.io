@@ -18,7 +18,7 @@ ZooKage helps you run big data animals in a sandbox environment
 
 - [Apache Hadoop(HDFS, YARN, MapReduce)](https://hadoop.apache.org/){:target="_blank"}
 - [Apache HBase](https://hbase.apache.org/){:target="_blank"}
-- [Apache Hive](https://hive.apache.org/){:target="_blank"}
+- [Apache Hive(HiveServer2, Hive Metastore, Iceberg REST Catalog API)](https://hive.apache.org/){:target="_blank"}
 - [Apache Ozone](https://ozone.apache.org/){:target="_blank"}
 - [Apache Ranger](https://ranger.apache.org/){:target="_blank"}
 - [Apache Spark](https://spark.apache.org/){:target="_blank"}
