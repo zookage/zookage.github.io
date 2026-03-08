@@ -8,7 +8,6 @@ permalink: /docs/quick-start
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/){:target="_blank"}
   - ZooKage officially supports macOS
-  - Some components might not start on a machine with Apple silicon + Rosetta 2
 - [8+GB RAM](https://docs.docker.com/desktop/settings/mac/#advanced){:target="_blank"}
   - You need more when you launch more components
 - [Kubernetes is enabled](https://docs.docker.com/get-started/orchestration/){:target="_blank"}
@@ -18,7 +17,7 @@ permalink: /docs/quick-start
 ### Set up a Hadoop cluster
 
 ```console
-$ git clone --branch v0.4.0 https://github.com/zookage/zookage.git
+$ git clone --branch v0.5.0 https://github.com/zookage/zookage.git
 $ cd zookage
 $ ./bin/up
 namespace/zookage created
