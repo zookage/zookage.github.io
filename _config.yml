@@ -1,8 +1,8 @@
 title: "ZooKage"
 description: >-
   Hadoop on Kubernetes on Docker Desktop
-domain: zookage.github.io
-url: "https://zookage.github.io/"
+domain: "zookage.org"
+url: "https://zookage.org/"
 github_username: zookage
 
 markdown: kramdown
