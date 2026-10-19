@@ -29,14 +29,14 @@ ZooKage helps you run big data animals in a sandbox environment
 ## Documents
 
 - [Quick Start](/docs/quick-start)
-- [How to use tools in ZooKage](/docs/tools)
-- [How to configure ZooKage](/docs/configuration)
+- [Guide: use and configure ZooKage](/docs/guide)
 - [How to build your own image](/docs/build-image)
 
 ## Tips
 
 - [How to prepare test data such as TPC-DS datasets](/docs/tips/test-data)
 - [How to access S3 compatible storage](/docs/tips/s3)
+- [How to attach a remote debugger](/docs/tips/debugger)
 
 ## Links
 
