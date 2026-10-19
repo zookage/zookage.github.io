@@ -1,0 +1,28 @@
+---
+layout: null
+permalink: /docs/configuration
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Guide | ZooKage</title>
+    <link rel="canonical" href="{{ '/docs/guide' | absolute_url }}">
+    <meta name="robots" content="noindex">
+    <script>
+      var guide = {{ '/docs/guide' | relative_url | jsonify }};
+      var sections = [
+        '#choose-components',
+        '#choose-versions',
+        '#supported-versions',
+        '#change-configurations',
+        '#set-up-ha'
+      ];
+      location.replace(guide + (sections.indexOf(location.hash) < 0 ? '#configure-the-cluster' : location.hash));
+    </script>
+    <meta http-equiv="refresh" content="0; url={{ '/docs/guide' | relative_url }}#configure-the-cluster">
+  </head>
+  <body>
+    <p>This page has moved to the <a href="{{ '/docs/guide' | relative_url }}#configure-the-cluster">Guide</a>.</p>
+  </body>
+</html>

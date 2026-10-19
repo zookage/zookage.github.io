@@ -30,7 +30,7 @@ All resources are ready!
 
 ### Log in to a client container
 
-With `./bin/ssh`, you can ssh into `client-node`. [Various command-line tools](/docs/tools#what-commands-are-available-on-client-node) such as `hdfs`, `yarn`, `beeline`, etc. are available.
+With `./bin/ssh`, you can ssh into `client-node`. [Various command-line tools](/docs/guide#connect-and-use) such as `hdfs`, `yarn`, `beeline`, etc. are available.
 
 ```console
 $ ./bin/ssh
@@ -58,4 +58,4 @@ zookage@client-node-0:~$ beeline
 
 You can access various web UIs such as [YARN ResourceManager](http://localhost:8088/cluster){:target="_blank"} through your browser.
 
-The list of available endpoints is [here](/docs/tools#web-ui).
+The list of available endpoints is [here](/docs/guide#web-ui).

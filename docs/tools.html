@@ -1,0 +1,27 @@
+---
+layout: null
+permalink: /docs/tools
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Guide | ZooKage</title>
+    <link rel="canonical" href="{{ '/docs/guide' | absolute_url }}">
+    <meta name="robots" content="noindex">
+    <script>
+      var guide = {{ '/docs/guide' | relative_url | jsonify }};
+      var sections = {
+        '#what-commands-are-available-on-client-node': guide + '#connect-and-use',
+        '#web-ui': guide + '#web-ui',
+        '#check-current-statuses-of-containers': guide + '#check-the-cluster',
+        '#attatch-a-remote-debugger-to-a-container': {{ '/docs/tips/debugger' | relative_url | jsonify }}
+      };
+      location.replace(sections[location.hash] || guide);
+    </script>
+    <meta http-equiv="refresh" content="0; url={{ '/docs/guide' | relative_url }}">
+  </head>
+  <body>
+    <p>This page has moved to the <a href="{{ '/docs/guide' | relative_url }}">Guide</a>.</p>
+  </body>
+</html>
