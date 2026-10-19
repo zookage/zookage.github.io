@@ -140,5 +140,3 @@ Enable ZooKeeper in `resources` and the HA patches in `patches` in `kustomizatio
 ```
 
 In both [hdfs-site.xml](https://github.com/zookage/zookage/blob/v0.5.0/kubernetes/base/common/config/hadoop/hdfs-site.xml){:target="_blank"} and [yarn-site.xml](https://github.com/zookage/zookage/blob/v0.5.0/kubernetes/base/common/config/hadoop/yarn-site.xml){:target="_blank"}, comment out the section between the `For non-HA` markers and uncomment the section between the `For HA` markers. The [HDFS](https://github.com/zookage/zookage/blob/v0.5.0/kubernetes/patches/ha/hdfs.yaml){:target="_blank"} and [YARN](https://github.com/zookage/zookage/blob/v0.5.0/kubernetes/patches/ha/yarn.yaml){:target="_blank"} patches configure the corresponding workloads.
-
-For remote debugging with port forwarding, see [Attach a remote debugger](/docs/tips/debugger).
