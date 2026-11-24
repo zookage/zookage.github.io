@@ -20,14 +20,11 @@ permalink: /docs/quick-start
 ```console
 $ git clone --branch v0.6.0 https://github.com/zookage/zookage.git
 $ cd zookage
-$ export ZOOKAGE_UTIL_IMAGE=zookage/zookage-util:0.6.0
 $ ./bin/up
 namespace/zookage created
 ...
 All resources are ready!
 ```
-
-`ZOOKAGE_UTIL_IMAGE` selects the local container that renders configuration templates before deployment. Use the `zookage/zookage-util:0.6.0` image as above for this release; the script defaults to `zookage/zookage-util:experimental` when the variable is unset.
 
 ### Log in to a client container
 
