@@ -34,6 +34,12 @@ The following commands are available on client-node:
 - `trino`
 - `yarn`
 
+If Kerberos authentication is enabled, acquire a ticket in the client container before running client commands:
+
+```console
+zookage@client-node-0:~$ kinit -kt /run/secrets/zookage/client/client.keytab zookage@ZOOKAGE.LOCAL
+```
+
 ## Check the cluster
 
 - `./bin/logs [pod]` prints logs from the given pod, or from all pods when no pod is specified.
@@ -70,6 +76,8 @@ The following URLs apply when the corresponding components are enabled without t
 - [HBase Master](http://localhost:16010/master-status){:target="_blank"}
 - [Spark History Server](http://localhost:18080/){:target="_blank"}
 - [MapReduce History Server](http://localhost:19888/jobhistory){:target="_blank"}
+
+With authentication enabled, HDFS uses HTTPS on port 9871 and Trino uses HTTPS on port 8443. Kerberos-protected web UIs require a ticket and a hostname matching the service principal.
 
 ## Configure the cluster
 
@@ -143,33 +151,4 @@ Enable ZooKeeper in `resources` and the HA patches in `patches` in `kustomizatio
 +- path: patches/ha/yarn.yaml
 ```
 
-The [HDFS](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/patches/ha/hdfs.yaml){:target="_blank"} and [YARN](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/patches/ha/yarn.yaml){:target="_blank"} patches configure replicas and template values for HA. The [HA profile](https://github.com/zookage/zookage/blob/v0.6.0/test/kubernetes/ha.yaml){:target="_blank"} contains a complete example.
-
-### Use Kerberos and Ranger
-
-The [auth profile](https://github.com/zookage/zookage/blob/v0.6.0/test/kubernetes/auth.yaml){:target="_blank"} enables Kerberos authentication and Ranger authorization across the included services. It includes the KDC, LDAP, service dependencies, and authentication and authorization patches. Use the [llap-auth profile](https://github.com/zookage/zookage/blob/v0.6.0/test/kubernetes/llap-auth.yaml){:target="_blank"} to combine authentication with LLAP.
-
-To try the auth profile, copy it over `kubernetes/kustomization.yaml` and restart the sandbox. Save any custom configuration first; `./bin/down` deletes the current namespace and its resources.
-
-```console
-$ cp test/kubernetes/auth.yaml kubernetes/kustomization.yaml
-$ ./bin/down
-$ ./bin/up
-$ ./bin/ssh
-zookage@client-node-0:~$ kinit -kt /run/secrets/zookage/client/client.keytab zookage@ZOOKAGE.LOCAL
-zookage@client-node-0:~$ klist
-```
-
-Acquire a ticket before running clients such as `hdfs`, `beeline`, or `trino`, and run `kinit` again if the ticket expires. The included credentials and certificates are for the local sandbox.
-
-#### Web access with authentication
-
-Authentication changes some of the [Web UI](#web-ui) endpoints: HDFS uses HTTPS on port 9871 and Trino uses HTTPS on port 8443. Kerberos-protected web endpoints require a ticket and a hostname matching the service principal. A ticket acquired inside `client-node-0` is available to clients there; it does not authenticate your host browser.
-
-For example, after the `kinit` command above, access HDFS from the client container:
-
-```console
-zookage@client-node-0:~$ curl --cacert /etc/zookage/shared/zookage-ca.crt --negotiate -u : https://hdfs-namenode-0.hdfs-namenode.zookage.svc.cluster.local:9871/dfshealth.html
-```
-
-Spark History Server uses a bearer token in the auth profile. See the [web integration check](https://github.com/zookage/zookage/blob/v0.6.0/test/integration/web.sh){:target="_blank"} for the authentication method and endpoint of each service.
+The [HDFS](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/patches/ha/hdfs.yaml){:target="_blank"} and [YARN](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/patches/ha/yarn.yaml){:target="_blank"} patches configure replicas and template values for HA.
