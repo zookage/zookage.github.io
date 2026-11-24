@@ -13,12 +13,6 @@ Use this guide after the [Quick Start](/docs/quick-start) to run, access, inspec
 
 ## Start and stop
 
-Set the configuration renderer to the release version in your terminal:
-
-```console
-$ export ZOOKAGE_UTIL_IMAGE=zookage/zookage-util:0.6.0
-```
-
 - `./bin/up` renders configuration templates in a local Docker container, then launches the cluster components.
 - `./bin/down` deletes the resources created by ZooKage.
 
