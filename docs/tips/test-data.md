@@ -6,9 +6,7 @@ permalink: /docs/tips/test-data
 
 ## Using Trino's TPCDS or TPCH connectors
 
-Enable `base/trino` in `kubernetes/kustomization.yaml` as described in the [Guide](/docs/guide#choose-components), then start the cluster with `./bin/up`. Keep the default HDFS, Hive, Hive Metastore, Tez, and YARN components enabled for the Hive examples below.
-
-Open the client shell with `./bin/ssh`. Datasets of TPC-DS or TPC-H are available via Trino's `tpcds` or `tpch` catalogs.
+Datasets of TPC-DS or TPC-H are available via `tpcds` or `tpch` catalogs.
 
 ```console
 zookage@client-node-0:~$ trino
@@ -71,8 +69,17 @@ You can query it from another query engine or system.
 
 ```console
 zookage@client-node-0:~$ beeline
+Connecting to jdbc:hive2://hive-hiveserver2:10000/default;password=dummy;user=zookage
+Connected to: Apache Hive (version 3.1.2)
 ...
-0: jdbc:hive2://hive-hiveserver2:10000/defaul> SELECT c_salutation, COUNT(*) FROM customer GROUP BY c_salutation ORDER BY c_salutation;
+----------------------------------------------------------------------------------------------
+        VERTICES      MODE        STATUS  TOTAL  COMPLETED  RUNNING  PENDING  FAILED  KILLED
+----------------------------------------------------------------------------------------------
+Map 1 .......... container     SUCCEEDED      1          1        0        0       0       0
+Reducer 2 ...... container     SUCCEEDED      1          1        0        0       0       0
+----------------------------------------------------------------------------------------------
+VERTICES: 02/02  [==========================>>] 100%  ELAPSED TIME: 5.28 s
+----------------------------------------------------------------------------------------------
 ...
 +---------------+------+
 | c_salutation  | _c1  |
@@ -85,4 +92,6 @@ zookage@client-node-0:~$ beeline
 | Ms.           | 125  |
 | Sir           | 167  |
 +---------------+------+
+7 rows selected (10.497 seconds)
+
 ```

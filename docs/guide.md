@@ -30,6 +30,7 @@ The following commands are available on client-node:
 
 - `aws`
 - `beeline`
+- `gohdfs` ([colinmarc/hdfs](https://github.com/colinmarc/hdfs))
 - `hbase`
 - `hdfs`
 - `kinit` and `klist` (for Kerberos authentication)
@@ -94,13 +95,13 @@ ZooKage includes HDFS, Hive, Tez, and YARN in its default sandbox cluster. Add o
 
 ### Choose versions
 
-Replace a `newTag` in `kustomization.yaml` to use a different image. Use images built with the v0.6.0 Dockerfiles so that their component directories match the image volume mounts. For example, after building a Spark image tagged `my-spark-build`:
+The Docker images used in ZooKage are interchangeable. Replace a `newTag` in `kustomization.yaml` to use a different version. For example:
 
 ```diff
  - name: zookage-spark
    newName: zookage/zookage-spark
 -  newTag: 4.1.4-zookage-0.6
-+  newTag: my-spark-build
++  newTag: 4.0.1-zookage-0.4
 ```
 
 #### Supported versions
@@ -117,7 +118,7 @@ ZooKage provides pre-built images for these components:
 - [Trino](https://hub.docker.com/r/zookage/zookage-trino/tags){:target="_blank"}
 - [ZooKeeper](https://hub.docker.com/r/zookage/zookage-zookeeper/tags){:target="_blank"}
 
-The v0.6.0 manifests use the following versions. These image tags use the `-zookage-0.6` suffix, such as `3.4.3-zookage-0.6`.
+The following list contains one valid combination. These image tags use the `-zookage-0.6` suffix, such as `3.4.3-zookage-0.6`.
 
 | Hadoop | HBase | Hive | Ozone | Ranger | Spark | Tez | Trino | ZooKeeper |
 | - | - | - | - | - | - | - | - | - |
@@ -158,21 +159,6 @@ Enable ZooKeeper in `resources` and the HA patches in `patches` in `kustomizatio
 ```
 
 The [HDFS](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/patches/ha/hdfs.yaml){:target="_blank"} and [YARN](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/patches/ha/yarn.yaml){:target="_blank"} patches configure replicas and template values for HA. The [HA profile](https://github.com/zookage/zookage/blob/v0.6.0/test/kubernetes/ha.yaml){:target="_blank"} contains a complete example.
-
-### Use Hive LLAP
-
-Enable ZooKeeper and the LLAP patch in `kubernetes/kustomization.yaml`:
-
-```diff
- resources:
--# - base/zookeeper
-+- base/zookeeper
- patches:
--# - path: patches/llap/hive.yaml
-+- path: patches/llap/hive.yaml
-```
-
-The patch starts two LLAP daemons and configures Hive to execute queries with LLAP. See the [LLAP profile](https://github.com/zookage/zookage/blob/v0.6.0/test/kubernetes/llap.yaml){:target="_blank"} for a complete configuration.
 
 ### Use Kerberos and Ranger
 

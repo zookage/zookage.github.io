@@ -12,7 +12,6 @@ permalink: /docs/quick-start
   - You need more when you launch more components
 - [Kubernetes is enabled](https://docs.docker.com/get-started/orchestration/){:target="_blank"}
   - Use Kubernetes 1.33 or later with [image volume support](https://kubernetes.io/docs/reference/storage/volume-types/#image) enabled in the cluster and supported by its container runtime; ZooKage shares component binaries through image volumes with `subPath` mounts
-- `git`, `docker`, and `kubectl` are available in your terminal, with `kubectl` using the Docker Desktop cluster
 
 ## Instructions
 
@@ -32,7 +31,7 @@ All resources are ready!
 
 ### Log in to a client container
 
-With `./bin/ssh`, you can open a shell in `client-node-0`. [Various command-line tools](/docs/guide#connect-and-use) such as `hdfs`, `yarn`, `beeline`, etc. are available.
+With `./bin/ssh`, you can ssh into `client-node`. [Various command-line tools](/docs/guide#connect-and-use) such as `hdfs`, `yarn`, `beeline`, etc. are available.
 
 ```console
 $ ./bin/ssh
