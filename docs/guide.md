@@ -122,18 +122,9 @@ You can also [build your own image](/docs/build-image) to test local changes.
 
 ### Change configurations
 
-Service configuration files are in [kubernetes/base/common/config](https://github.com/zookage/zookage/tree/v0.6.0/kubernetes/base/common/config){:target="_blank"}. Hadoop settings are split by component:
+Service configuration files are in [kubernetes/base/common/config](https://github.com/zookage/zookage/tree/v0.6.0/kubernetes/base/common/config){:target="_blank"}. For example, tune HDFS parameters in [hdfs-site.xml](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/base/common/config/hdfs/hdfs-site.xml){:target="_blank"}.
 
-- Shared settings: `hadoop/core-site.xml`
-- HDFS: `hdfs/hdfs-site.xml`
-- YARN: `yarn/yarn-site.xml`
-- MapReduce: `mapreduce/mapred-site.xml`
-
-Some files contain Go templates whose values come from the `config-values` ConfigMap in [config-values.yaml](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/base/common/config/config-values.yaml){:target="_blank"}. Change a fixed setting in its configuration file, or set a template's parameter in the values ConfigMap. Values must be strings; quote boolean and numeric values. The `hdfs-config-values` and `mapreduce-config-values` ConfigMaps provide component-specific overrides of the shared values.
-
-The patches in `kubernetes/patches` set these values for features such as HA, Kerberos, and LLAP. Keep `render-config.yaml` in the `transformers` list in `kubernetes/kustomization.yaml`, and use `./bin/up` to evaluate templates before applying the manifests.
-
-Secrets are defined under [kubernetes/base/common/secret](https://github.com/zookage/zookage/tree/v0.6.0/kubernetes/base/common/secret){:target="_blank"} and mounted under `/run/secrets/zookage` in containers. When changing a JCEKS credential store, edit its adjacent `.properties` file and regenerate the `.jceks` file with `./test/jceks create <jceks-file>` before deploying.
+Template values can be configured in [config-values.yaml](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/base/common/config/config-values.yaml){:target="_blank"}; `./bin/up` renders them automatically.
 
 ### Set up HA
 
