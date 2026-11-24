@@ -4,7 +4,7 @@ title: Guide
 permalink: /docs/guide
 ---
 
-Use this guide after the [Quick Start](/docs/quick-start) to run, access, inspect, and configure your ZooKage cluster. The file paths and examples below refer to ZooKage v0.5.0, the version used in the Quick Start.
+Use this guide after the [Quick Start](/docs/quick-start) to run, access, inspect, and configure your ZooKage cluster. The file paths and examples below refer to ZooKage v0.6.0, the version used in the Quick Start.
 
 - [Start and stop](#start-and-stop)
 - [Connect and use](#connect-and-use)
@@ -13,7 +13,7 @@ Use this guide after the [Quick Start](/docs/quick-start) to run, access, inspec
 
 ## Start and stop
 
-- `./bin/up` launches the cluster components.
+- `./bin/up` renders configuration templates in a local Docker container, then launches the cluster components.
 - `./bin/down` deletes the resources created by ZooKage.
 
 ## Connect and use
@@ -27,11 +27,18 @@ The following commands are available on client-node:
 - `gohdfs` ([colinmarc/hdfs](https://github.com/colinmarc/hdfs))
 - `hbase`
 - `hdfs`
+- `kinit` and `klist` (for Kerberos authentication)
 - `ozone`
 - `spark-shell`
 - `spark-sql`
 - `trino`
 - `yarn`
+
+If Kerberos authentication is enabled, acquire a ticket in the client container before running client commands:
+
+```console
+zookage@client-node-0:~$ kinit -kt /run/secrets/zookage/client/client.keytab zookage@ZOOKAGE.LOCAL
+```
 
 ## Check the cluster
 
@@ -51,8 +58,9 @@ hdfs-datanode-2                     1/1     Running     0          7m19s
 
 ### Web UI
 
-You can access web UIs through a browser on your host machine when the corresponding components are enabled. This feature is not stable and you may sometimes have to reboot Docker Desktop when the following ports are inaccessible.
+The following URLs apply when the corresponding components are enabled without the authentication patches. You can access them through a browser on your host machine. This feature is not stable and you may sometimes have to reboot Docker Desktop when the following ports are inaccessible.
 
+- [ZooKage Console](http://localhost:3000/){:target="_blank"}
 - [Keycloak Web UI (username=admin, password=admin)](http://localhost:8080/admin/master/console/)
 - [Ranger Web UI (username=admin, password=admin)](http://localhost:6080/login.jsp)
 - [Trino Web UI](http://localhost:8090/ui/){:target="_blank"}
@@ -69,9 +77,11 @@ You can access web UIs through a browser on your host machine when the correspon
 - [Spark History Server](http://localhost:18080/){:target="_blank"}
 - [MapReduce History Server](http://localhost:19888/jobhistory){:target="_blank"}
 
+With authentication enabled, HDFS uses HTTPS on port 9871 and Trino uses HTTPS on port 8443. Kerberos-protected web UIs require a ticket and a hostname matching the service principal.
+
 ## Configure the cluster
 
-Edit [kustomization.yaml](https://github.com/zookage/zookage/blob/v0.5.0/kubernetes/kustomization.yaml){:target="_blank"} to choose components and image versions, or change configuration files to tune individual services.
+Edit [kustomization.yaml](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/kustomization.yaml){:target="_blank"} to choose components and image versions, or change configuration files to tune individual services.
 
 ### Choose components
 
@@ -92,7 +102,7 @@ The Docker images used in ZooKage are interchangeable. Replace a `newTag` in `ku
 ```diff
  - name: zookage-spark
    newName: zookage/zookage-spark
--  newTag: 4.1.1-zookage-0.5
+-  newTag: 4.1.4-zookage-0.6
 +  newTag: 4.0.1-zookage-0.4
 ```
 
@@ -110,17 +120,19 @@ ZooKage provides pre-built images for these components:
 - [Trino](https://hub.docker.com/r/zookage/zookage-trino/tags){:target="_blank"}
 - [ZooKeeper](https://hub.docker.com/r/zookage/zookage-zookeeper/tags){:target="_blank"}
 
-The following list contains one valid combination. These image tags use the `-zookage-0.5` suffix, such as `3.4.1-zookage-0.5`.
+The following list contains one valid combination. These image tags use the `-zookage-0.6` suffix, such as `3.4.3-zookage-0.6`.
 
 | Hadoop | HBase | Hive | Ozone | Ranger | Spark | Tez | Trino | ZooKeeper |
 | - | - | - | - | - | - | - | - | - |
-| 3.4.1 | 2.6.3 | 4.2.0 | 2.0.0 | 2.7.0 | 4.1.1 | 0.10.5 | 479 | 3.9.4 |
+| 3.4.3 | 2.6.7 | 4.2.1 | 2.2.2 | 2.9.0 | 4.1.4 | 0.10.5 | 484 | 3.9.7 |
 
 You can also [build your own image](/docs/build-image) to test local changes.
 
 ### Change configurations
 
-Service configuration files are in [kubernetes/base/common/config](https://github.com/zookage/zookage/tree/v0.5.0/kubernetes/base/common/config){:target="_blank"}. For example, tune HDFS parameters in [hdfs-site.xml](https://github.com/zookage/zookage/blob/v0.5.0/kubernetes/base/common/config/hadoop/hdfs-site.xml){:target="_blank"}.
+Service configuration files are in [kubernetes/base/common/config](https://github.com/zookage/zookage/tree/v0.6.0/kubernetes/base/common/config){:target="_blank"}. For example, tune HDFS parameters in [hdfs-site.xml](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/base/common/config/hdfs/hdfs-site.xml){:target="_blank"}.
+
+Template values can be configured in [config-values.yaml](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/base/common/config/config-values.yaml){:target="_blank"}; `./bin/up` renders them automatically.
 
 ### Set up HA
 
@@ -139,4 +151,4 @@ Enable ZooKeeper in `resources` and the HA patches in `patches` in `kustomizatio
 +- path: patches/ha/yarn.yaml
 ```
 
-In both [hdfs-site.xml](https://github.com/zookage/zookage/blob/v0.5.0/kubernetes/base/common/config/hadoop/hdfs-site.xml){:target="_blank"} and [yarn-site.xml](https://github.com/zookage/zookage/blob/v0.5.0/kubernetes/base/common/config/hadoop/yarn-site.xml){:target="_blank"}, comment out the section between the `For non-HA` markers and uncomment the section between the `For HA` markers. The [HDFS](https://github.com/zookage/zookage/blob/v0.5.0/kubernetes/patches/ha/hdfs.yaml){:target="_blank"} and [YARN](https://github.com/zookage/zookage/blob/v0.5.0/kubernetes/patches/ha/yarn.yaml){:target="_blank"} patches configure the corresponding workloads.
+The [HDFS](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/patches/ha/hdfs.yaml){:target="_blank"} and [YARN](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/patches/ha/yarn.yaml){:target="_blank"} patches configure replicas and template values for HA.

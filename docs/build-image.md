@@ -25,6 +25,8 @@ Then, you will update the file. For example, if you develop Hadoop on `/Users/ok
 +HADOOP_SOURCE_DIR=/Users/okumin/ghq/github.com/okumin/hadoop
 ```
 
+`docker/images.env` now contains the shared base-image tags and digests. The build scripts load it after `docker/build.env`, so base-image settings in an older local `build.env` do not override the tracked pins.
+
 # Build a Docker image
 
 You can build a new image by running `./docker/build-{component name}.sh`. For example, if you want to build an image of Hadoop, you will run the following command and follow instructions.
@@ -40,11 +42,11 @@ Build YARN UI V2? [Y/n]:
 
 # Use your own image
 
-You can seamlessly use the new Docker image in ZooKage by updating [kustomization.yaml](https://github.com/zookage/zookage/blob/main/kubernetes/kustomization.yaml){:target="_blank"}.
+You can seamlessly use the new Docker image in ZooKage by updating [kustomization.yaml](https://github.com/zookage/zookage/blob/v0.6.0/kubernetes/kustomization.yaml){:target="_blank"}.
 
 ```diff
  - name: zookage-hadoop
    newName: zookage/zookage-hadoop
--  newTag: "3.4.1-zookage-0.5"
+-  newTag: "3.4.3-zookage-0.6"
 +  newTag: "zookage-3.4.2"
 ```
