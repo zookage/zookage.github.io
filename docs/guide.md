@@ -4,7 +4,7 @@ title: Guide
 permalink: /docs/guide
 ---
 
-Use this guide after the [Quick Start](/docs/quick-start) to run, access, inspect, and configure your ZooKage cluster. The file paths and examples below refer to ZooKage v0.6.0, the version used in the Quick Start.
+Use this guide after the [Quick Start](/docs/quick-start) to run, access, inspect, and configure your ZooKage cluster. Unless stated otherwise, the file paths and examples below refer to ZooKage v0.6.0, the version used in the Quick Start.
 
 - [Start and stop](#start-and-stop)
 - [Connect and use](#connect-and-use)
@@ -33,6 +33,8 @@ The following commands are available on client-node:
 - `spark-sql`
 - `trino`
 - `yarn`
+
+On the development version, additional clients must be [enabled separately](#choose-client-tools-development-version).
 
 If Kerberos authentication is enabled, acquire a ticket in the client container before running client commands:
 
@@ -94,6 +96,24 @@ ZooKage includes HDFS, Hive, Tez, and YARN in its default sandbox cluster. Add o
 +- base/ozone
 +- base/spark
 ```
+
+### Choose client tools (development version)
+
+Client selection applies to the unreleased `main` branch. ZooKage v0.6.0 includes all clients.
+
+Hadoop and the utility commands are always available on `client-node`; the default configuration also enables the Hive client (`beeline`). Select additional clients through `patches/client/<component>.yaml` entries in the `patches` section of [kustomization.yaml on main](https://github.com/zookage/zookage/blob/main/kubernetes/kustomization.yaml){:target="_blank"}. Client selection is independent of the server `resources`, so enable the clients you intend to use as well as the corresponding services.
+
+For example, enable the Trino CLI by uncommenting its client patch:
+
+```diff
+ patches:
+-# - path: patches/client/trino.yaml
++- path: patches/client/trino.yaml
+```
+
+Client patches are available for `hbase`, `hive`, `ozone`, `spark`, `tez`, `trino`, and `zookeeper`. Each adds the component image and its required configuration mounts. Spark also mounts the Hive configuration for metastore access. Apply the updated configuration with `./bin/up`; selecting only the clients you use reduces the images that must be downloaded before `client-node` starts.
+
+Enable `patches/client/tez.yaml` to submit Tez jobs directly from `client-node`. Beeline sends queries to HiveServer2, which runs Tez on the server side, so Hive queries do not need the Tez client patch. Keep the server-side `base/tez` resource enabled for Hive on Tez.
 
 ### Choose versions
 
